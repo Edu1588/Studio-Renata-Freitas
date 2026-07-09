@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, ReactNode } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
 import {
   Accordion,
   AccordionContent,
@@ -26,6 +26,8 @@ import {
   Instagram,
   Facebook,
   BookOpen,
+  Menu,
+  X,
 } from "lucide-react";
 
 const WHATSAPP = "https://api.whatsapp.com/send/?phone=5519998327180&text=Ol%C3%A1!%20Vim%20atrav%C3%A9s%20do%20seu%20site%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es%20sobre%20as%20aulas%20de%20Pilates.";
@@ -99,34 +101,15 @@ export function StudioSite() {
 
 /* ------------------------------ NAV ------------------------------ */
 function Nav() {
-  const [isLightBg, setIsLightBg] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const checkBg = () => {
-      const darkElements = document.querySelectorAll('[data-theme="dark"]');
-      let isOverDark = false;
-      const header = document.querySelector('header');
-      if (header) {
-        const rectHeader = header.getBoundingClientRect();
-        const headerCenterY = rectHeader.top + rectHeader.height / 2;
-
-        darkElements.forEach((el) => {
-          const rect = el.getBoundingClientRect();
-          if (headerCenterY >= rect.top && headerCenterY <= rect.bottom) {
-            isOverDark = true;
-          }
-        });
-      }
-      setIsLightBg(!isOverDark);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
     };
-
-    window.addEventListener("scroll", checkBg, { passive: true });
-    window.addEventListener("resize", checkBg, { passive: true });
-    checkBg();
-    return () => {
-      window.removeEventListener("scroll", checkBg);
-      window.removeEventListener("resize", checkBg);
-    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const links = [
@@ -138,28 +121,85 @@ function Nav() {
   ];
 
   return (
-    <motion.header
-      initial={{ y: -30, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-      className={`fixed top-6 left-1/2 z-50 -translate-x-1/2 transition-all duration-500 w-max`}
-    >
-      <nav className="flex flex-wrap justify-center items-center gap-2 md:gap-3 px-4">
-        {links.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className={`rounded-[20px] border backdrop-blur-md px-4 py-1.5 text-sm font-medium transition-colors ${
-              isLightBg
-                ? "border-foreground/30 bg-foreground/5 text-foreground hover:bg-foreground/10"
-                : "border-white/40 bg-white/5 text-white hover:bg-white/20"
-            }`}
+    <>
+      {/* Desktop Nav */}
+      <motion.header
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="fixed top-6 left-1/2 z-50 -translate-x-1/2 transition-all duration-500 w-max hidden md:block"
+      >
+        <nav className="flex items-center gap-3">
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="relative px-4 py-2 text-sm font-medium rounded-[20px] overflow-hidden group border border-white/40 shadow-sm min-h-[44px] flex items-center justify-center"
+            >
+              <div className="absolute inset-0 bg-white/10 backdrop-blur-md transition-colors group-hover:bg-white/20 -z-10"></div>
+              <span className="text-white drop-shadow-md" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>{link.label}</span>
+            </a>
+          ))}
+        </nav>
+      </motion.header>
+
+      {/* Mobile Header (Logo + Toggle) */}
+      <motion.header
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="fixed top-4 left-4 right-4 z-50 flex items-center justify-between md:hidden"
+      >
+        <a href="#top" className="flex items-center z-50">
+          <img 
+            src="https://studiorenatafreitas.com.br/wp-content/uploads/2024/02/RenataFreitas_marca_01-01-1.svg" 
+            alt="Studio Renata Freitas" 
+            className="h-5 w-auto brightness-0 invert opacity-90 mix-blend-difference"
+          />
+        </a>
+
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="relative p-2.5 rounded-full overflow-hidden border border-white/40 flex items-center justify-center shadow-sm z-50"
+          aria-label="Toggle Menu"
+        >
+          <div className="absolute inset-0 bg-white/10 backdrop-blur-md -z-10"></div>
+          {mobileMenuOpen ? (
+            <X className="w-6 h-6 text-white drop-shadow-md" style={{ filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.5))" }} />
+          ) : (
+            <Menu className="w-6 h-6 text-white drop-shadow-md" style={{ filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.5))" }} />
+          )}
+        </button>
+      </motion.header>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            animate={{ opacity: 1, backdropFilter: "blur(16px)" }}
+            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-wine-deep/90 md:hidden"
           >
-            {link.label}
-          </a>
-        ))}
-      </nav>
-    </motion.header>
+            <nav className="flex flex-col items-center gap-8">
+              {links.map((link, i) => (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 + 0.1 }}
+                  className="text-3xl font-serif text-white hover:text-lavender transition-colors"
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
@@ -181,7 +221,7 @@ function Hero() {
     >
       {/* 1) Background image */}
       <motion.div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+        className="absolute inset-0 bg-cover bg-[position:62%_center] md:bg-center bg-no-repeat z-0"
         style={{ backgroundImage: `url(${bgImg})`, y }}
       />
       
@@ -189,7 +229,7 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-r from-[#a98972]/80 via-[#a98972]/20 to-transparent pointer-events-none z-[1]" />
 
       {/* 2) Huge Text "RENATA FREITAS" (Below Overlay) */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none overflow-hidden z-[2]">
+      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none overflow-hidden z-[4] md:z-[2]">
         <div className="flex w-full px-4 md:px-8 justify-start opacity-0">
           <p className="text-xl md:text-3xl font-light tracking-wide whitespace-nowrap -mb-2 md:-mb-4 lg:-mb-8">
             Pilates o movimento que cura
@@ -205,7 +245,7 @@ function Hero() {
 
       {/* 3) Overlay Image (Above Huge Text) */}
       <motion.div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none z-[3]"
+        className="absolute inset-0 bg-cover bg-[position:62%_center] md:bg-center bg-no-repeat pointer-events-none z-[3]"
         style={{ backgroundImage: `url(${overlayImg})`, y }}
       />
 
@@ -240,11 +280,11 @@ function Hero() {
           transition={{ duration: 0.9, delay: 0.4 }}
           className="mt-auto flex flex-col sm:flex-row justify-center gap-4"
         >
-          <a href="#studio" className="flex items-center justify-center rounded-[24px] bg-white px-8 py-3.5 text-sm font-medium text-stone-700 hover:bg-stone-50 transition-colors shadow-lg">
+          <a href="#studio" className="flex min-h-[48px] items-center justify-center rounded-[24px] bg-white px-8 py-3.5 text-sm font-medium text-stone-700 hover:bg-stone-50 transition-colors shadow-lg">
             Conheça o Studio
           </a>
-          <a href="#experiencias" className="flex items-center justify-center rounded-[24px] border border-white/40 bg-white/5 backdrop-blur-md px-8 py-3.5 text-sm font-medium text-white hover:bg-white/20 transition-colors shadow-lg">
-            Explorar com calma
+          <a href="#metodo" className="flex min-h-[48px] items-center justify-center rounded-[24px] border border-white/40 bg-white/5 backdrop-blur-md px-8 py-3.5 text-sm font-medium text-white hover:bg-white/20 transition-colors shadow-lg">
+            Aulas Personalizadas
           </a>
         </motion.div>
       </div>
@@ -271,7 +311,7 @@ function About() {
             <div className="glass absolute -bottom-8 -right-6 max-w-xs rounded-2xl p-5">
               <p className="text-script text-primary text-2xl leading-none">Rua Emilio Ribas</p>
               <p className="text-foreground/70 mt-2 text-sm">
-                No coração do Cambuí — estacionamento próprio & manobrista.
+                No coração do Cambuí, estacionamento próprio & manobrista.
               </p>
             </div>
           </div>
@@ -427,7 +467,7 @@ function MethodSection() {
           </h2>
           <p className="text-foreground/75 mt-6 leading-relaxed">
             O Método Pilates integra corpo e mente com aparelhos específicos para a reeducação
-            do movimento. Aprimora respiração, reduz estresse e aumenta a flexibilidade —
+            do movimento. Aprimora respiração, reduz estresse e aumenta a flexibilidade,
             eficaz contra dores crônicas e lesões, para todas as idades.
           </p>
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -525,7 +565,7 @@ function RenataSection() {
             <div className="shadow-soft overflow-hidden rounded-[2rem]">
               <img
                 src={renataPortrait}
-                alt="Renata Freitas — fundadora"
+                alt="Renata Freitas, fundadora"
                 width={1024}
                 height={1280}
                 loading="lazy"
@@ -549,14 +589,14 @@ function RenataSection() {
             Formada em fisioterapia em 2010, especializou-se em Pilates no ano seguinte e concluiu
             a formação em CoreAlign em 2012. Em 2022, aprofundou-se com pós-graduação em
             medicina chinesa e acupuntura. Hoje, entre Brasil e Estados Unidos, mantém-se em
-            constante atualização — sempre em busca de inovação e excelência para o Studio.
+            constante atualização, sempre em busca de inovação e excelência para o Studio.
           </p>
 
           <div className="mt-8 space-y-3">
             {[
               { year: "2010", event: "Graduação em Fisioterapia" },
               { year: "2011", event: "Especialização em Pilates" },
-              { year: "2012", event: "Formação em CoreAlign — fundação do Studio" },
+              { year: "2012", event: "Formação em CoreAlign, fundação do Studio" },
               { year: "2022", event: "Pós em Medicina Chinesa e Acupuntura" },
             ].map((t) => (
               <div key={t.year} className="flex items-center gap-5">
@@ -696,7 +736,7 @@ function FAQSection() {
     { q: "Qual o tempo de duração da aula de Pilates?", a: "Nossas aulas têm duração de 50 minutos." },
     {
       q: "Pilates emagrece?",
-      a: "O Pilates não é projetado para perda de peso, mas contribui como parte de um programa: fortalece, tonifica, melhora consciência corporal e reduz estresse — o que apoia hábitos saudáveis e favorece o emagrecimento quando combinado com dieta equilibrada.",
+      a: "O Pilates não é projetado para perda de peso, mas contribui como parte de um programa: fortalece, tonifica, melhora consciência corporal e reduz estresse, o que apoia hábitos saudáveis e favorece o emagrecimento quando combinado com dieta equilibrada.",
     },
     {
       q: "É possível ter ganho de massa magra no pilates?",
@@ -708,7 +748,7 @@ function FAQSection() {
     },
     {
       q: "Quais os benefícios do Pilates?",
-      a: "Fortalecimento de core, melhora da postura, aumento de flexibilidade, equilíbrio, coordenação, redução de estresse, prevenção de lesões, e aumento de energia e vitalidade — uma abordagem holística para corpo e mente.",
+      a: "Fortalecimento de core, melhora da postura, aumento de flexibilidade, equilíbrio, coordenação, redução de estresse, prevenção de lesões, e aumento de energia e vitalidade, uma abordagem holística para corpo e mente.",
     },
     {
       q: "Quais os benefícios do Pilates para a terceira idade?",
@@ -880,7 +920,7 @@ function Contact() {
                   </div>
                   <div>
                     <p className="text-foreground/90 font-medium text-sm md:text-base">
-                      Rua Dr. Emilio Ribas, 443 — Cambuí
+                      Rua Dr. Emilio Ribas, 443, Cambuí
                     </p>
                     <p className="text-foreground/60 text-xs mt-0.5">
                       13025-141 · Campinas / SP

@@ -3,26 +3,37 @@
 <head>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  body { background: linear-gradient(to right, #000, #fff); height: 100vh; margin: 0; display: flex; align-items: center; justify-content: center; }
+  body { height: 100vh; margin: 0; display: flex; flex-direction: column; }
+  .light-bg { background: #d7cfc5; flex: 1; display: flex; align-items: center; justify-content: center; }
+  .dark-bg { background: #3a0d16; flex: 1; display: flex; align-items: center; justify-content: center; }
 </style>
 </head>
 <body>
 
-<div class="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex gap-3">
-  <!-- Option 1: difference on the whole thing -->
-  <a href="#" class="rounded-[20px] border border-white/40 bg-white/5 backdrop-blur-md px-4 py-1.5 text-sm font-medium text-white hover:bg-white/20 transition-colors mix-blend-difference">
-    Option 1
-  </a>
-  
-  <!-- Option 2: difference just on text, glass on parent -->
-  <a href="#" class="rounded-[20px] border border-white/40 bg-white/5 backdrop-blur-md px-4 py-1.5 text-sm font-medium hover:bg-white/20 transition-colors">
-    <span class="mix-blend-difference text-white">Option 2</span>
-  </a>
-  
-  <!-- Option 3: just normal glass -->
-  <a href="#" class="rounded-[20px] border border-white/40 bg-white/5 backdrop-blur-md px-4 py-1.5 text-sm font-medium text-white hover:bg-white/20 transition-colors">
-    Option 3
-  </a>
+<div class="light-bg">
+  <div class="flex gap-3">
+    <a href="#" class="relative px-4 py-1.5 text-sm font-medium group flex items-center justify-center rounded-[20px] overflow-hidden">
+      <!-- Glass Background -->
+      <div class="absolute inset-0 bg-white/10 backdrop-blur-md transition-colors group-hover:bg-white/20"></div>
+      <!-- Difference Border -->
+      <div class="absolute inset-0 border border-white rounded-[20px] mix-blend-difference pointer-events-none"></div>
+      <!-- Difference Text -->
+      <span class="relative z-10 mix-blend-difference text-white">O Studio</span>
+    </a>
+  </div>
+</div>
+
+<div class="dark-bg">
+  <div class="flex gap-3">
+    <a href="#" class="relative px-4 py-1.5 text-sm font-medium group flex items-center justify-center rounded-[20px] overflow-hidden">
+      <!-- Glass Background -->
+      <div class="absolute inset-0 bg-white/10 backdrop-blur-md transition-colors group-hover:bg-white/20"></div>
+      <!-- Difference Border -->
+      <div class="absolute inset-0 border border-white rounded-[20px] mix-blend-difference pointer-events-none"></div>
+      <!-- Difference Text -->
+      <span class="relative z-10 mix-blend-difference text-white">O Studio</span>
+    </a>
+  </div>
 </div>
 
 </body>

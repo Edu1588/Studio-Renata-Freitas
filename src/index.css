@@ -47,7 +47,7 @@
 :root {
   --radius: 1rem;
 
-  /* Brand palette — lavender / burgundy / cream */
+  /* Brand palette, lavender / burgundy / cream */
   --cream: oklch(0.975 0.012 90);
   --lavender-soft: oklch(0.94 0.03 315);
   --lavender: oklch(0.86 0.05 315);
