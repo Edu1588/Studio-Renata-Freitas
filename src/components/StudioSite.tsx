@@ -253,7 +253,7 @@ function Hero() {
       {/* 2) Huge Text "RENATA FREITAS" (Below Overlay) */}
       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none overflow-hidden z-[4] md:z-[2]">
         <div className="flex w-full px-4 md:px-8 justify-start opacity-0">
-          <p className="text-xl md:text-3xl font-light tracking-wide whitespace-nowrap -mb-2 md:-mb-4 lg:-mb-8">
+          <p className="text-xl md:text-3xl font-thin tracking-wide whitespace-nowrap -mb-2 md:-mb-4 lg:-mb-8">
             Pilates o movimento que cura
           </p>
         </div>
@@ -279,7 +279,7 @@ function Hero() {
           transition={{ duration: 0.9, delay: 0.2 }}
           className="flex w-full px-4 md:px-8 justify-start"
         >
-          <p className="text-white text-xl md:text-3xl font-light tracking-wide drop-shadow-sm whitespace-nowrap -mb-2 md:-mb-4 lg:-mb-8">
+          <p className="text-white text-xl md:text-3xl font-thin tracking-wide whitespace-nowrap -mb-2 md:-mb-4 lg:-mb-8">
             Pilates o movimento que cura
           </p>
         </motion.div>
@@ -416,9 +416,9 @@ function Offerings() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
           {items.map((it, i) => (
             <FadeUp key={it.title} delay={i * 0.06}>
-              <div className="bg-white border border-primary/5 hover:border-primary/10 rounded-[2rem] shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col h-full overflow-hidden">
+              <div className="relative flex flex-col h-full rounded-[2rem] hover:-translate-y-1 transition-transform duration-300 bg-transparent group">
                 {/* Image Container flush with top, left, and right */}
-                <div className="overflow-hidden rounded-b-[1.5rem] aspect-[1.1] w-full bg-slate-50">
+                <div className="relative z-10 overflow-hidden rounded-[2rem] aspect-[1.1] w-full bg-slate-50 shadow-sm">
                   <img
                     src={it.image}
                     alt={it.title}
@@ -427,21 +427,29 @@ function Offerings() {
                   />
                 </div>
                 
-                {/* Title and Description Content Area */}
-                <div className="flex flex-col flex-1 p-6 pb-8">
-                  {/* Title row (centered, no plus sign) */}
-                  <div className="border-b border-primary/10 pb-4 text-center">
-                    <h3 className="text-primary text-xs font-bold tracking-wider uppercase">
-                      {it.title}
-                    </h3>
-                  </div>
+                {/* Title and Description Content Area (Drawer) */}
+                <div className="relative z-0 -mt-6 overflow-hidden rounded-b-[2rem]">
+                  <motion.div
+                    initial={{ y: "-100%" }}
+                    whileInView={{ y: 0 }}
+                    viewport={{ once: true, margin: "-80px" }}
+                    transition={{ duration: 0.8, delay: i * 0.1 + 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="bg-white border border-primary/5 flex flex-col flex-1 p-6 pt-10 pb-8 shadow-sm transition-colors duration-300 group-hover:border-primary/10 h-full"
+                  >
+                    {/* Title row (centered, no plus sign) */}
+                    <div className="border-b border-primary/10 pb-4 text-center">
+                      <h3 className="text-primary text-xs font-bold tracking-wider uppercase">
+                        {it.title}
+                      </h3>
+                    </div>
 
-                  {/* Description - Centered style */}
-                  <div className="pt-6 flex-1 flex items-center justify-center">
-                    <p className="text-foreground/75 text-center text-sm leading-relaxed max-w-[280px]">
-                      {it.body}
-                    </p>
-                  </div>
+                    {/* Description - Centered style */}
+                    <div className="pt-6 flex-1 flex items-center justify-center">
+                      <p className="text-foreground/75 text-center text-sm leading-relaxed max-w-[280px]">
+                        {it.body}
+                      </p>
+                    </div>
+                  </motion.div>
                 </div>
               </div>
             </FadeUp>
