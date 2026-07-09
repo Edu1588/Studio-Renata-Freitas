@@ -139,7 +139,7 @@ function Nav() {
           <img 
             src="https://studiorenatafreitas.com.br/wp-content/uploads/2024/02/RenataFreitas_marca_01-01-1.svg" 
             alt="Studio Renata Freitas" 
-            className="h-6 lg:h-8 w-auto brightness-0 invert opacity-90 mix-blend-difference"
+            className="h-6 lg:h-8 w-auto brightness-0 invert opacity-90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
           />
         </a>
 
@@ -173,7 +173,7 @@ function Nav() {
           <img 
             src="https://studiorenatafreitas.com.br/wp-content/uploads/2024/02/RenataFreitas_marca_01-01-1.svg" 
             alt="Studio Renata Freitas" 
-            className="h-5 w-auto brightness-0 invert opacity-90 mix-blend-difference"
+            className="h-5 w-auto brightness-0 invert opacity-90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
           />
         </a>
 
@@ -469,7 +469,7 @@ function MethodSection() {
             <motion.div
               animate={{ rotate: [0, 3, -3, 0] }}
               transition={{ duration: 10, repeat: Infinity }}
-              className="glass absolute -top-12 right-0 md:-top-6 md:-right-6 max-w-[200px] md:max-w-[220px] rounded-2xl p-5 z-10"
+              className="glass absolute -top-24 right-2 md:-top-16 md:-right-8 max-w-[200px] md:max-w-[220px] rounded-2xl p-5 z-10"
             >
               <p className="text-script text-primary text-xl leading-none">Joseph Pilates, 1920</p>
               <p className="text-foreground/70 mt-2 text-xs leading-relaxed">
