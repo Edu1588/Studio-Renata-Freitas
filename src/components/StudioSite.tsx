@@ -133,20 +133,33 @@ function Nav() {
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="fixed top-6 left-1/2 z-50 -translate-x-1/2 transition-all duration-500 w-max hidden md:block"
+        className="fixed top-6 left-0 right-0 px-8 z-50 transition-all duration-500 hidden md:flex items-center justify-between pointer-events-none"
       >
-        <nav className="flex items-center gap-3">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="relative px-4 py-2 text-sm font-medium rounded-[20px] overflow-hidden group border border-white/40 shadow-sm min-h-[44px] flex items-center justify-center"
-            >
-              <div className="absolute inset-0 bg-white/10 backdrop-blur-md transition-colors group-hover:bg-white/20 -z-10"></div>
-              <span className="text-white drop-shadow-md" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>{link.label}</span>
-            </a>
-          ))}
-        </nav>
+        <a href="#top" className="flex items-center z-50 pointer-events-auto">
+          <img 
+            src="https://studiorenatafreitas.com.br/wp-content/uploads/2024/02/RenataFreitas_marca_01-01-1.svg" 
+            alt="Studio Renata Freitas" 
+            className="h-6 lg:h-8 w-auto brightness-0 invert opacity-90 mix-blend-difference"
+          />
+        </a>
+
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-auto">
+          <nav className="flex items-center gap-2 lg:gap-3 xl:gap-4">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="relative px-4 py-1.5 lg:px-5 lg:py-2 xl:px-8 xl:py-2 text-xs lg:text-sm font-medium rounded-[20px] overflow-hidden group border border-white/40 shadow-sm flex items-center justify-center whitespace-nowrap"
+              >
+                <div className="absolute inset-0 bg-white/10 backdrop-blur-md transition-colors group-hover:bg-white/20 -z-10"></div>
+                <span className="text-white drop-shadow-md" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>{link.label}</span>
+              </a>
+            ))}
+          </nav>
+        </div>
+        
+        {/* Placeholder to balance layout */}
+        <div className="w-[100px] lg:w-[150px]"></div>
       </motion.header>
 
       {/* Mobile Header (Logo + Toggle) */}
@@ -456,7 +469,7 @@ function MethodSection() {
             <motion.div
               animate={{ rotate: [0, 3, -3, 0] }}
               transition={{ duration: 10, repeat: Infinity }}
-              className="glass absolute -top-6 -right-6 max-w-[220px] rounded-2xl p-5"
+              className="glass absolute -top-12 right-0 md:-top-6 md:-right-6 max-w-[200px] md:max-w-[220px] rounded-2xl p-5 z-10"
             >
               <p className="text-script text-primary text-xl leading-none">Joseph Pilates, 1920</p>
               <p className="text-foreground/70 mt-2 text-xs leading-relaxed">
