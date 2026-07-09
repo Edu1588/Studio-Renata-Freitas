@@ -1,0 +1,6 @@
+{
+  "name": "Studio Renata Freitas",
+  "description": "Estúdio de Pilates de alta performance e bem-estar no Cambuí, Campinas. Aulas personalizadas por fisioterapeutas graduados.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
