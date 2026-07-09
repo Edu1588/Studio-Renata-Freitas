@@ -36,6 +36,12 @@ export function StudioSite() {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
+    // Ensure the page always opens at the top
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+
     const handleScroll = () => {
       // Show back-to-top button starting from section 2 (scrollY > 500)
       setShowScrollTop(window.scrollY > 500);
