@@ -106,7 +106,7 @@ export function StudioSite() {
 }
 
 /* ------------------------------ NAV ------------------------------ */
-function Nav() {
+export function Nav({ withBanner = false }: { withBanner?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -128,6 +128,9 @@ function Nav() {
 
   return (
     <>
+      {withBanner && (
+        <div className="fixed top-0 left-0 right-0 h-20 bg-[#751e2d] shadow-md z-40" />
+      )}
       {/* Desktop Nav */}
       <motion.header
         initial={{ y: -30, opacity: 0 }}
@@ -139,7 +142,7 @@ function Nav() {
           <img 
             src="https://studiorenatafreitas.com.br/wp-content/uploads/2024/02/RenataFreitas_marca_01-01-1.svg" 
             alt="Studio Renata Freitas" 
-            className="h-6 lg:h-8 w-auto brightness-0 invert opacity-90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
+            className="h-6 lg:h-8 w-auto brightness-0 invert opacity-90"
           />
         </a>
 
@@ -173,7 +176,7 @@ function Nav() {
           <img 
             src="https://studiorenatafreitas.com.br/wp-content/uploads/2024/02/RenataFreitas_marca_01-01-1.svg" 
             alt="Studio Renata Freitas" 
-            className="h-5 w-auto brightness-0 invert opacity-90 drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
+            className="h-5 w-auto brightness-0 invert opacity-90"
           />
         </a>
 
@@ -979,7 +982,7 @@ function Contact() {
 
             <div className="mt-8 border-t border-primary/10 pt-6">
               <p className="text-xs text-foreground/50 leading-relaxed">
-                Estacionamento próprio com manobrista gratuito para sua total comodidade.
+                Bem-vindo ao nosso espaço de bem-estar.
               </p>
             </div>
           </div>
@@ -1061,41 +1064,66 @@ function Contact() {
 }
 
 /* ------------------------------ FOOTER ------------------------------ */
-function Footer() {
+export function Footer() {
   return (
-    <footer className="border-t border-primary/10 py-10">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 text-sm text-foreground/60 md:flex-row">
-        <div className="flex items-baseline gap-1">
-          <span className="font-serif italic text-primary text-base">Renata</span>
-          <span className="text-script text-primary/80 text-base">Freitas</span>
-          <span className="ml-2 text-xs tracking-widest uppercase">Studio</span>
-        </div>
-        
-        <p className="order-3 md:order-2 text-center md:text-left">
-          © {new Date().getFullYear()} Studio Renata Freitas · Cambuí, Campinas
-        </p>
+    <footer className="border-t border-primary/10 py-16 bg-white/50">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+          <div className="col-span-1 md:col-span-2">
+            <div className="flex items-baseline gap-1 mb-4">
+              <span className="font-serif italic text-primary text-xl">Renata</span>
+              <span className="text-script text-primary/80 text-xl">Freitas</span>
+              <span className="ml-2 text-xs tracking-widest uppercase">Studio</span>
+            </div>
+            <p className="text-sm text-foreground/60 max-w-sm leading-relaxed mb-6">
+              Transformando vidas através do movimento consciente. Pilates focado na reabilitação, força e bem-estar em um ambiente acolhedor.
+            </p>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://www.instagram.com/studiorenatafreitas/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary hover:text-[#E1306C] transition-colors p-2 rounded-full hover:bg-[color:var(--lavender-soft)]"
+                title="Siga no Instagram"
+                aria-label="Siga no Instagram"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.facebook.com/studiorenatafreitas"
+                target="_blank"
+                rel="noreferrer"
+                className="text-primary hover:text-[#1877F2] transition-colors p-2 rounded-full hover:bg-[color:var(--lavender-soft)]"
+                title="Siga no Facebook"
+                aria-label="Siga no Facebook"
+              >
+                <Facebook className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
+          
+          <div>
+            <h4 className="font-serif text-primary text-lg mb-4">Links Rápidos</h4>
+            <ul className="space-y-3 text-sm text-foreground/70">
+              <li><a href="#studio" className="hover:text-primary transition-colors">O Studio</a></li>
+              <li><a href="#metodo" className="hover:text-primary transition-colors">O Método</a></li>
+              <li><a href="#beneficios" className="hover:text-primary transition-colors">Benefícios</a></li>
+              <li><a href="#renata" className="hover:text-primary transition-colors">A Renata</a></li>
+            </ul>
+          </div>
 
-        <div className="order-2 md:order-3 flex items-center gap-4">
-          <a
-            href="https://www.instagram.com/studiorenatafreitas/"
-            target="_blank"
-            rel="noreferrer"
-            className="text-primary hover:text-[#E1306C] transition-colors p-2 rounded-full hover:bg-[color:var(--lavender-soft)]"
-            title="Siga no Instagram"
-            aria-label="Siga no Instagram"
-          >
-            <Instagram className="h-5 w-5" />
-          </a>
-          <a
-            href="https://www.facebook.com/studiorenatafreitas"
-            target="_blank"
-            rel="noreferrer"
-            className="text-primary hover:text-[#1877F2] transition-colors p-2 rounded-full hover:bg-[color:var(--lavender-soft)]"
-            title="Siga no Facebook"
-            aria-label="Siga no Facebook"
-          >
-            <Facebook className="h-5 w-5" />
-          </a>
+          <div>
+            <h4 className="font-serif text-primary text-lg mb-4">Legal</h4>
+            <ul className="space-y-3 text-sm text-foreground/70">
+              <li><a href="#/privacidade" className="hover:text-primary transition-colors">Política de Privacidade</a></li>
+              <li><a href="#/termos" className="hover:text-primary transition-colors">Termos de Uso</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="pt-8 border-t border-primary/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-foreground/50">
+          <p>© {new Date().getFullYear()} Studio Renata Freitas. Todos os direitos reservados.</p>
+          <p>Cambuí, Campinas - SP</p>
         </div>
       </div>
     </footer>
