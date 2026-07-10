@@ -144,7 +144,7 @@ export function Nav({ withBanner = false }: { withBanner?: boolean }) {
             alt="Studio Renata Freitas" 
             width={180}
             height={32}
-            className="h-6 lg:h-8 w-auto object-contain"
+            className="h-6 lg:h-8 w-auto object-contain brightness-0 invert opacity-90 drop-shadow-md"
           />
         </a>
 
@@ -183,7 +183,7 @@ export function Nav({ withBanner = false }: { withBanner?: boolean }) {
             alt="Studio Renata Freitas" 
             width={150}
             height={20}
-            className="h-5 w-auto object-contain"
+            className="h-5 w-auto object-contain brightness-0 invert opacity-90 drop-shadow-md"
           />
         </a>
 

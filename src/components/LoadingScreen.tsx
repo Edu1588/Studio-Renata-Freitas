@@ -101,7 +101,7 @@ export function LoadingScreen({ onLoadingComplete }: { onLoadingComplete: () => 
             alt="Studio Renata Freitas"
             width={240}
             height={42}
-            className="w-auto h-10 md:h-12 object-contain"
+            className="w-auto h-10 md:h-12 object-contain brightness-0 opacity-90"
           />
         </motion.div>
         
