@@ -144,7 +144,7 @@ export function Nav({ withBanner = false }: { withBanner?: boolean }) {
             alt="Studio Renata Freitas" 
             width={180}
             height={32}
-            className="h-6 lg:h-8 w-auto brightness-0 invert opacity-90"
+            className="h-6 lg:h-8 w-auto object-contain"
           />
         </a>
 
@@ -183,7 +183,7 @@ export function Nav({ withBanner = false }: { withBanner?: boolean }) {
             alt="Studio Renata Freitas" 
             width={150}
             height={20}
-            className="h-5 w-auto brightness-0 invert opacity-90"
+            className="h-5 w-auto object-contain"
           />
         </a>
 
@@ -549,7 +549,7 @@ function BenefitsSection() {
     { icon: Users, title: "Redução de estresse", body: "Ambiente acolhedor que promove relaxamento mental." },
   ];
   return (
-    <section id="beneficios" className="relative overflow-hidden py-28">
+    <section id="beneficios" className="relative overflow-hidden pt-28 pb-0">
       <div className="bg-lavender-grad absolute inset-x-0 top-0 -z-10 h-1/2" />
       <div className="mx-auto max-w-7xl px-6">
         <FadeUp>
@@ -576,20 +576,18 @@ function BenefitsSection() {
             </FadeUp>
           ))}
         </div>
-
-        <FadeUp delay={0.3}>
-          <div className="mt-16 overflow-hidden rounded-[2rem]">
-            <img
-              src={personalizedCare}
-              alt="Atendimento individualizado no studio"
-              width={1280}
-              height={960}
-              loading="lazy"
-              className="h-[380px] w-full object-cover md:h-[520px]"
-            />
-          </div>
-        </FadeUp>
       </div>
+
+      <FadeUp delay={0.3}>
+        <div className="mt-8 w-full relative">
+          <img
+            src="https://res.cloudinary.com/ifuatk2z/image/upload/q_auto,f_auto/v1783695420/renatafreitasPILATES_l4w0bq.png"
+            alt="Benefícios do Pilates"
+            loading="lazy"
+            className="w-full h-auto"
+          />
+        </div>
+      </FadeUp>
     </section>
   );
 }
