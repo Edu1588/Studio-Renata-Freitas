@@ -145,3 +145,37 @@
     radial-gradient(ellipse 800px 400px at 20% 30%, color-mix(in oklab, var(--lavender) 40%, transparent), transparent 60%),
     radial-gradient(ellipse 600px 500px at 80% 70%, color-mix(in oklab, var(--wine) 8%, transparent), transparent 60%);
 }
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@utility animate-shimmer {
+  animation: shimmer 3s infinite;
+}
+
+.border-shine-container {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.border-shine-element {
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(90deg, transparent 40%, rgba(255,255,255,1) 50%, transparent 60%);
+  animation: shimmer-border 3s infinite linear;
+}
+
+@keyframes shimmer-border {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(50%); }
+}

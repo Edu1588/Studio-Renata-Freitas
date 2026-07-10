@@ -152,10 +152,13 @@ export function Nav({ withBanner = false }: { withBanner?: boolean }) {
               <a
                 key={link.href}
                 href={link.href}
-                className="relative px-4 py-1.5 lg:px-5 lg:py-2 xl:px-8 xl:py-2 text-xs lg:text-sm font-medium rounded-[20px] overflow-hidden group border border-white/40 shadow-sm flex items-center justify-center whitespace-nowrap"
+                className="relative px-4 py-1.5 lg:px-5 lg:py-2 xl:px-8 xl:py-2 text-xs lg:text-sm font-medium rounded-[20px] group shadow-sm flex items-center justify-center whitespace-nowrap"
               >
-                <div className="absolute inset-0 bg-white/10 backdrop-blur-md transition-colors group-hover:bg-white/20 -z-10"></div>
-                <span className="text-white drop-shadow-md" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>{link.label}</span>
+                <div className="border-shine-container -z-10">
+                  <div className="border-shine-element"></div>
+                </div>
+                <div className="absolute inset-0 rounded-[20px] bg-white/10 backdrop-blur-md transition-colors group-hover:bg-white/20 -z-20"></div>
+                <span className="text-white drop-shadow-md z-10" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}>{link.label}</span>
               </a>
             ))}
           </nav>
