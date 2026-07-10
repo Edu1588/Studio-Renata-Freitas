@@ -3,9 +3,12 @@ import { StudioSite } from "./components/StudioSite";
 import { PrivacyPolicy } from "./components/PrivacyPolicy";
 import { TermsOfUse } from "./components/TermsOfUse";
 import { AnimatePresence, motion } from "motion/react";
+import { LoadingScreen } from "./components/LoadingScreen";
+
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.hash || '#/');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const onHashChange = () => {
@@ -34,7 +37,11 @@ export default function App() {
   };
 
   return (
-    <AnimatePresence mode="wait">
+    <>
+      <AnimatePresence>
+        {isLoading && <LoadingScreen key="loading" onLoadingComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
+      <AnimatePresence mode="wait">
       <motion.div
         key={currentPath === '#/privacidade' || currentPath === '#/termos' ? currentPath : 'home'}
         initial={{ opacity: 0, clipPath: "circle(0% at 50% 50%)" }}
@@ -46,5 +53,6 @@ export default function App() {
         {renderPage()}
       </motion.div>
     </AnimatePresence>
+    </>
   );
 }

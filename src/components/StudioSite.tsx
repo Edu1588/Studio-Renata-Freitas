@@ -10,7 +10,7 @@ import { FlowingBackground } from "@/components/FlowingBackground";
 const studioInterior = "https://studiorenatafreitas.com.br/wp-content/uploads/2025/10/CL_0444-scaled-1.jpg";
 const pilatesPractice = "https://studiorenatafreitas.com.br/wp-content/uploads/2025/10/CL_0437-scaled-1.jpg";
 const personalizedCare = "https://images.unsplash.com/photo-1678985854460-94df3afe13f4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-const renataPortrait = "https://res.cloudinary.com/ifuatk2z/image/upload/v1783536612/1_tss9vp.jpg";
+const renataPortrait = "https://res.cloudinary.com/ifuatk2z/image/upload/q_auto,f_auto/v1783536612/1_tss9vp.jpg";
 import {
   MapPin,
   Phone,
@@ -142,6 +142,8 @@ export function Nav({ withBanner = false }: { withBanner?: boolean }) {
           <img 
             src="https://studiorenatafreitas.com.br/wp-content/uploads/2024/02/RenataFreitas_marca_01-01-1.svg" 
             alt="Studio Renata Freitas" 
+            width={180}
+            height={32}
             className="h-6 lg:h-8 w-auto brightness-0 invert opacity-90"
           />
         </a>
@@ -179,6 +181,8 @@ export function Nav({ withBanner = false }: { withBanner?: boolean }) {
           <img 
             src="https://studiorenatafreitas.com.br/wp-content/uploads/2024/02/RenataFreitas_marca_01-01-1.svg" 
             alt="Studio Renata Freitas" 
+            width={150}
+            height={20}
             className="h-5 w-auto brightness-0 invert opacity-90"
           />
         </a>
@@ -235,8 +239,8 @@ function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
-  const bgImg = "https://res.cloudinary.com/ifuatk2z/image/upload/v1783538038/kneh8jpbgafglyvxgqxb_kagdim.png";
-  const overlayImg = "https://res.cloudinary.com/ifuatk2z/image/upload/v1783538038/RENATA_PNG_zvnjvt.png";
+  const bgImg = "https://res.cloudinary.com/ifuatk2z/image/upload/q_auto,f_auto/v1783538038/kneh8jpbgafglyvxgqxb_kagdim.png";
+  const overlayImg = "https://res.cloudinary.com/ifuatk2z/image/upload/q_auto,f_auto/v1783538038/RENATA_PNG_zvnjvt.png";
 
   return (
     <section
@@ -247,7 +251,7 @@ function Hero() {
       {/* 1) Background image */}
       <motion.div 
         className="absolute inset-0 bg-cover bg-[position:62%_center] md:bg-center bg-no-repeat z-0"
-        style={{ backgroundImage: `url(${bgImg})`, y }}
+        style={{ backgroundImage: `url(${bgImg})`, y, willChange: "transform" }}
       />
       
       {/* Gradient for better readability */}
@@ -271,7 +275,7 @@ function Hero() {
       {/* 3) Overlay Image (Above Huge Text) */}
       <motion.div 
         className="absolute inset-0 bg-cover bg-[position:62%_center] md:bg-center bg-no-repeat pointer-events-none z-[3]"
-        style={{ backgroundImage: `url(${overlayImg})`, y }}
+        style={{ backgroundImage: `url(${overlayImg})`, y, willChange: "transform" }}
       />
 
       {/* 4) Small Text "Pilates..." (Above Overlay) */}
@@ -382,17 +386,17 @@ function Offerings() {
     {
       title: "Instrutores qualificados",
       body: "Fisioterapeutas certificados garantindo ensino de alta qualidade.",
-      image: "https://res.cloudinary.com/ifuatk2z/image/upload/v1783548231/Captura_de_tela_2026-07-08_190242_bsk3ai.png",
+      image: "https://res.cloudinary.com/ifuatk2z/image/upload/q_auto,f_auto/v1783548231/Captura_de_tela_2026-07-08_190242_bsk3ai.png",
     },
     {
       title: "Ambiente inspirador",
       body: "Um espaço tranquilo e convidativo, que estimula foco e motivação.",
-      image: "https://res.cloudinary.com/ifuatk2z/image/upload/v1783548322/Captura_de_tela_2026-07-08_190414_mh8j4n.png",
+      image: "https://res.cloudinary.com/ifuatk2z/image/upload/q_auto,f_auto/v1783548322/Captura_de_tela_2026-07-08_190414_mh8j4n.png",
     },
     {
       title: "Equipamentos de ponta",
       body: "Os melhores aparelhos para uma prática eficiente e segura.",
-      image: "https://res.cloudinary.com/ifuatk2z/image/upload/v1783548355/Captura_de_tela_2026-07-08_190447_jlfsra.png",
+      image: "https://res.cloudinary.com/ifuatk2z/image/upload/q_auto,f_auto/v1783548355/Captura_de_tela_2026-07-08_190447_jlfsra.png",
     },
     {
       title: "Atendimento especializado",
@@ -402,7 +406,7 @@ function Offerings() {
     {
       title: "Localização & conveniência",
       body: "Cambuí, estacionamento próprio e serviço de manobrista.",
-      image: "https://res.cloudinary.com/ifuatk2z/image/upload/v1783548477/Captura_de_tela_2026-07-08_190650_ddsohk.png",
+      image: "https://res.cloudinary.com/ifuatk2z/image/upload/q_auto,f_auto/v1783548477/Captura_de_tela_2026-07-08_190650_ddsohk.png",
     },
   ];
   return (
@@ -425,6 +429,8 @@ function Offerings() {
                   <img
                     src={it.image}
                     alt={it.title}
+                    width={600}
+                    height={545}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />

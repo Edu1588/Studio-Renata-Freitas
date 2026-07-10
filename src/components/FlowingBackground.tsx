@@ -51,7 +51,7 @@ export function FlowingBackground() {
           );
         }
         const curve = new THREE.CatmullRomCurve3(points);
-        const geom = new THREE.TubeGeometry(curve, 200, radius, 12, false);
+        const geom = new THREE.TubeGeometry(curve, 64, radius, 8, false);
         const mat = new THREE.MeshBasicMaterial({
           color,
           transparent: true,
